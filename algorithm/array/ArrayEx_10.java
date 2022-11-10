@@ -8,24 +8,23 @@ import java.util.StringTokenizer;
 public class ArrayEx_10 {
     public int solution(int n, int[][] arr) {
         int answer = 0;
-        // 상하좌우 탐색때 쓸 배열
+        // 특정 인덱스의 상 우 하 좌를 탐색하기 위해 필요한 위치값
         int[] dx = {-1, 0, 1, 0};
         int[] dy = {0, 1, 0, -1};
-
         for (int i=0; i<n; i++) {
             for (int j=0; j<n; j++) {
                 boolean isBong = true;
-                // 상하좌우 탐색
+                // 각 요소의 상하좌우 인덱스와 크기 비교해서 봉우리 여부를 판단해야 한다
                 for (int k=0; k<4; k++) {
-                    int nx = i+dx[k];
-                    int ny = j+dy[k];
-                    // 봉우리가 아님
-                    if (nx>=0 && nx<n && ny>=0 && ny<n && arr[nx][ny] > arr[i][j]) {
+                    int searchX = i+dx[k];
+                    int searchY = j+dy[k];
+
+                    // 특정 인덱스가 상하좌우보다 작다면 봉우리가 아님
+                    if (searchX>=0 && searchX<n && searchY>=0 && searchY<n && arr[i][j] <= arr[searchX][searchY]) {
                         isBong = false;
                         break;
                     }
                 }
-                // 봉우리면 ++
                 if (isBong) answer++;
             }
         }
